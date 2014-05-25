@@ -1,0 +1,12 @@
+{
+    "DEFAULT": {
+        "executable": "namd2"
+    },
+    "stampede.tacc": {
+        "pre_exec": "module load namd/2.9"
+    },
+    "archer.uk": {
+        "executable": "/wherever/special_cray_namd.bin",
+        "pre_exec": ["module load cray", "module load cnamd"
+    }
+}
