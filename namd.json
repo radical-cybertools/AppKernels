@@ -7,6 +7,6 @@
     },
     "archer.uk": {
         "executable": "/wherever/special_cray_namd.bin",
-        "pre_exec": ["module load cray", "module load cnamd"
+        "pre_exec": ["module load cray", "module load cnamd"]
     }
 }
