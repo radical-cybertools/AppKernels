@@ -37,4 +37,6 @@ class MDKernelTestCases(unittest.TestCase):
         r1.kernel = "NAMD"
         r1.arguments = ["-a1", "-b2", "-c2"]
 
+        cud = r1.as_compute_unit_description(resource="stampede.tacc.utexas.edu", cores=16)
+
 

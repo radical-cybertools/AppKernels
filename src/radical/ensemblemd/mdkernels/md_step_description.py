@@ -66,3 +66,11 @@ class MDStepDescription(attributes.Attributes) :
         self._attributes_register(MIN_VERSION,   None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
         self._attributes_register(INPUT_DATA,    None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
         self._attributes_register(OUTPUT_DATA,   None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
+
+
+    def as_compute_unit_description(self, resource, cores):
+        """Return a RADICAL-Pilot ComputeUnitDescription of the MD step that can
+            run on 'resource' and uses 'cores' cores.
+        """
+        pass
+
