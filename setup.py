@@ -72,7 +72,7 @@ def get_version():
     return short_version, long_version
 
 
-short_version, long_version = get_version ()
+#short_version, long_version = get_version ()
 
 #-----------------------------------------------------------------------------
 # check python version. we need > 2.5, <3.x
@@ -87,7 +87,7 @@ def read(*rnames):
 #-----------------------------------------------------------------------------
 setup_args = {
     'name'             : 'radical.ensemblemd.mdkernels',
-    'version'          : short_version,
+    'version'          : 0.1,
     'description'      : "BAC is a tool for molecular dynamics binding affinity calculations.",
     'long_description' : (read('README.md') + '\n\n' + read('CHANGES.md')),
     'author'           : 'RADICAL Group at Rutgers University',
@@ -129,7 +129,7 @@ setup_args = {
     'package_dir' :       {'': 'src'},  
 
     'package_data'     :  {'': ['*.sh', 'VERSION', 'VERSION.git']},
-    'install_requires' :  ['radical.pilot', 'setuptools>=1'],
+    'install_requires' :  ['setuptools>=1'],
 
     'zip_safe'         : False,
 }
