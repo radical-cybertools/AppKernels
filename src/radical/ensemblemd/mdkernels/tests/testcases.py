@@ -31,4 +31,10 @@ class MDKernelTestCases(unittest.TestCase):
     def test__one(self):
         """ Test ONE.
         """
-        assert True == True
+        from radical.ensemblemd.mdkernels import MDStepDescription
+
+        r1 = MDStepDescription()
+        r1.kernel = "NAMD"
+        r1.arguments = ["-a1", "-b2", "-c2"]
+
+
