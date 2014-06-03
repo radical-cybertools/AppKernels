@@ -131,6 +131,8 @@ setup_args = {
     'package_data'     :  {'': ['*.sh', 'VERSION', 'VERSION.git']},
     'install_requires' :  ['setuptools>=1'],
 
+    'test_suite'       : 'radical.ensemblemd.mdkernels.tests',
+
     'zip_safe'         : False,
 }
 
