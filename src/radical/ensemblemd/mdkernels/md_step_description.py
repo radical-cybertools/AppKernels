@@ -4,12 +4,63 @@ __license__   = "MIT"
 import saga.attributes as attributes
 
 # ------------------------------------------------------------------------------
-# Attribute description keys
+# MDStepDescription attribute description keys
 KERNEL                 = 'kernel'
 MIN_VERSION            = 'min_version'
 ARGUMENTS              = 'arguments'
 INPUT_DATA             = 'input_data'
 OUTPUT_DATA            = 'output_data'
+
+# ------------------------------------------------------------------------------
+# Additional BoundMDStep attribute description keys
+EXECUTABLE             = 'executable'
+RESOURCE               = 'resource'
+
+# ------------------------------------------------------------------------------
+#
+class BoundMDStep(attributes.Attributes) :
+    """A BoundMDStep object is a read-only data-strucutre that defines specific 
+       executables and arguments for an MD kernel / engine invocation on a 
+       specific resource.
+
+    .. data:: executable 
+
+       (`Attribute`) The executable (`string`).
+
+    .. data:: arguments 
+
+       (`Attribute`) The arguments to the executable (`list of strings`).
+
+    .. data:: resource 
+
+       (`Attribute`) The resource this BoundMDStep was bound to (`string`).
+
+    .. data:: input_data 
+
+       (`Attribute`) The input files that need to be transferred before execution (`transfer directive string`).
+
+    .. data:: output_data 
+
+       (`Attribute`) The output files that need to be transferred back after execution (`transfer directive string`).
+
+    """
+    def __init__(self, _executable, _arguments, _resource, _input_data, _output_data):
+        """Le constructeur.
+        """ 
+
+        # initialize attributes
+        attributes.Attributes.__init__(self)
+
+        # set attribute interface properties
+        self._attributes_extensible  (False)
+        self._attributes_camelcasing (True)
+
+        # register properties with the attribute interface
+        self._attributes_register(EXECUTABLE,    _executable,  attributes.STRING, attributes.SCALAR, attributes.READONLY)
+        self._attributes_register(ARGUMENTS,     _arguments,   attributes.STRING, attributes.VECTOR, attributes.READONLY)
+        self._attributes_register(RESOURCE,      _resource,    attributes.STRING, attributes.SCALAR, attributes.READONLY)
+        self._attributes_register(INPUT_DATA,    _input_data,  attributes.STRING, attributes.VECTOR, attributes.READONLY)
+        self._attributes_register(OUTPUT_DATA,   _output_data, attributes.STRING, attributes.VECTOR, attributes.READONLY)
 
 # ------------------------------------------------------------------------------
 #
@@ -68,9 +119,19 @@ class MDStepDescription(attributes.Attributes) :
         self._attributes_register(OUTPUT_DATA,   None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
 
 
-    def as_compute_unit_description(self, resource, cores):
-        """Return a RADICAL-Pilot ComputeUnitDescription of the MD step that can
-            run on 'resource' and uses 'cores' cores.
+    def bind(self, resource, cores):
+        """Binds a class:`radical.ensemblemd.mdkernels.MDStepDescription` to a 
+           specific resource. The resulting class:`radical.ensemblemd.mdkernels.BoundMDStep`
+           contains the description of executables and arguments necessary to 
+           execute the MDStep on the specified resource.
         """
-        pass
+        bmds = BoundMDStep(
+            _executable=None, 
+            _arguments=[], 
+            _resource=resource, 
+            _input_data=[], 
+            _output_data=[]
+        )
+
+        return bmds
 
