@@ -1,0 +1,10 @@
+{
+    "kernel_name": "NAMD",
+    "kernel_configs": {
+
+        "stampede.tacc.utexas.edu": {
+            "environment"   : {},
+            "pre_execution" : "module load TACC && module load namd/2.9",
+            "executable"    : "/opt/apps/intel13/mvapich2_1_9/namd/2.9/bin/namd2"
+    }
+}
