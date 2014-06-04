@@ -125,10 +125,11 @@ setup_args = {
     'namespace_packages': ['radical', 'radical.ensemblemd'],
     'packages'    :       ['radical', 
                            'radical.ensemblemd', 
-                           'radical.ensemblemd.mdkernels'],
+                           'radical.ensemblemd.mdkernels',
+                           'radical.ensemblemd.mdkernels.configs'],
     'package_dir' :       {'': 'src'},  
 
-    'package_data'     :  {'': ['*.sh', 'VERSION', 'VERSION.git']},
+    'package_data'     :  {'': ['*.sh', '*.json', 'VERSION', 'VERSION.git']},
     'install_requires' :  ['radical.pilot', 'setuptools>=1'],
 
     'test_suite'       : 'radical.ensemblemd.mdkernels.tests',
