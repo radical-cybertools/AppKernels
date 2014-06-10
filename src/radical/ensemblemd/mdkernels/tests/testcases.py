@@ -34,9 +34,9 @@ class MDKernelTestCases(unittest.TestCase):
         from radical.ensemblemd.mdkernels.loader import kerneldict
 
         assert kerneldict != {}
-        assert "MMPBSA" in kerneldict, "Missing key in kernel dict"
-        assert "GROMACS" in kerneldict, "Missing key in kernel dict"
-        assert "NAMD" in kerneldict, "Missing key in kernel dict"
+        assert "TEST" in kerneldict, "Missing key in kernel dict"
+        assert "test.host.01" in kerneldict["TEST"]
+        assert "test.host.02" in kerneldict["TEST"]
 
     #-------------------------------------------------------------------------
     #

@@ -1,0 +1,16 @@
+{
+    "kernel_name": "TEST",
+    "kernel_configs": {
+
+        "test.host.01": {
+            "environment"   : {},
+            "pre_execution" : "/bin/hostname",
+            "executable"    : "/bin/date"
+        },
+        "test.host.02": {
+            "environment"   : {},
+            "pre_execution" : "/bin/hostname",
+            "executable"    : "/bin/date"
+        }
+    }
+}
