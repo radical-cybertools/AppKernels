@@ -19,6 +19,7 @@ OUTPUT_DATA            = 'output_data'
 ENVIRONMENT            = 'environment'
 PRE_EXEC               = 'pre_exec'
 EXECUTABLE             = 'executable'
+MPI                    = 'mpi'
 RESOURCE               = 'resource'
 
 # ------------------------------------------------------------------------------
@@ -49,7 +50,7 @@ class BoundMDTask(attributes.Attributes) :
        (`Attribute`) The output files that need to be transferred back after execution (`transfer directive string`).
 
     """
-    def __init__(self, _environment, _pre_exec, _executable, _arguments, _resource, _input_data, _output_data):
+    def __init__(self, _environment, _pre_exec, _executable, _mpi, _arguments, _resource, _input_data, _output_data):
         """Le constructeur.
         """ 
 
@@ -64,6 +65,7 @@ class BoundMDTask(attributes.Attributes) :
         self._attributes_register(ENVIRONMENT,   _environment, attributes.STRING, attributes.VECTOR, attributes.READONLY)
         self._attributes_register(PRE_EXEC,      _pre_exec,    attributes.STRING, attributes.SCALAR, attributes.READONLY)
         self._attributes_register(EXECUTABLE,    _executable,  attributes.STRING, attributes.SCALAR, attributes.READONLY)
+        self._attributes_register(MPI,           _mpi,         attributes.BOOL,   attributes.SCALAR, attributes.READONLY)
         self._attributes_register(ARGUMENTS,     _arguments,   attributes.STRING, attributes.VECTOR, attributes.READONLY)
         self._attributes_register(RESOURCE,      _resource,    attributes.STRING, attributes.SCALAR, attributes.READONLY)
         self._attributes_register(INPUT_DATA,    _input_data,  attributes.STRING, attributes.VECTOR, attributes.READONLY)
@@ -136,14 +138,20 @@ class MDTaskDescription(attributes.Attributes) :
         try: 
           kernel = kerneldict[self.kernel][resource]
 
+          if 'uses_mpi' in kernel:
+              uses_mpi = bool(kernel['uses_mpi']),
+          else:
+              uses_mpi = False
+
           bmds = BoundMDTask(
-              _environment=  kernel['environment'],
-              _pre_exec=     kernel['pre_exec'],
-              _executable=   kernel['executable'], 
-              _arguments=    self.arguments, 
-              _resource=     resource, 
-              _input_data=   self.input_data, 
-              _output_data=  self.output_data
+              _environment = kernel['environment'],
+              _pre_exec    = kernel['pre_exec'],
+              _executable  = kernel['executable'], 
+              _mpi         = uses_mpi,
+              _arguments   = self.arguments, 
+              _resource    = resource, 
+              _input_data  = self.input_data, 
+              _output_data = self.output_data
           )
 
           return bmds
