@@ -33,7 +33,7 @@ class MDKernelTestCases(unittest.TestCase):
         """
         from radical.ensemblemd.mdkernels import MDTaskDescription
 
-        r1 = MDStepDescription()
+        r1 = MDTaskDescription()
         r1.kernel = "NAMD"
         r1.arguments = ["-a1", "-b2", "-c2"]
 

@@ -127,7 +127,7 @@ class MDTaskDescription(attributes.Attributes) :
            contains the description of executables and arguments necessary to 
            execute the MDTask on the specified resource.
         """
-        bmds = BoundMDStep(
+        bmds = BoundMDTask(
             _executable=None, 
             _arguments=[], 
             _resource=resource, 
