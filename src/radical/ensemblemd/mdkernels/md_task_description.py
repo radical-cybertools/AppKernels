@@ -3,6 +3,7 @@ __license__   = "MIT"
 __author__    = "Ole Weidner <ole.weidner@rutgers.edu>"
 
 from logger            import logger
+from loader            import kerneldict
 import saga.attributes as attributes
 
 # ------------------------------------------------------------------------------
@@ -15,6 +16,8 @@ OUTPUT_DATA            = 'output_data'
 
 # ------------------------------------------------------------------------------
 # Additional BoundMDTask attribute description keys
+ENVIRONMENT            = 'environment'
+PRE_EXEC               = 'pre_exec'
 EXECUTABLE             = 'executable'
 RESOURCE               = 'resource'
 
@@ -46,7 +49,7 @@ class BoundMDTask(attributes.Attributes) :
        (`Attribute`) The output files that need to be transferred back after execution (`transfer directive string`).
 
     """
-    def __init__(self, _executable, _arguments, _resource, _input_data, _output_data):
+    def __init__(self, _environment, _pre_exec, _executable, _arguments, _resource, _input_data, _output_data):
         """Le constructeur.
         """ 
 
@@ -58,6 +61,8 @@ class BoundMDTask(attributes.Attributes) :
         self._attributes_camelcasing (True)
 
         # register properties with the attribute interface
+        self._attributes_register(ENVIRONMENT,   _environment, attributes.STRING, attributes.VECTOR, attributes.READONLY)
+        self._attributes_register(PRE_EXEC,      _pre_exec,    attributes.STRING, attributes.SCALAR, attributes.READONLY)
         self._attributes_register(EXECUTABLE,    _executable,  attributes.STRING, attributes.SCALAR, attributes.READONLY)
         self._attributes_register(ARGUMENTS,     _arguments,   attributes.STRING, attributes.VECTOR, attributes.READONLY)
         self._attributes_register(RESOURCE,      _resource,    attributes.STRING, attributes.SCALAR, attributes.READONLY)
@@ -121,19 +126,29 @@ class MDTaskDescription(attributes.Attributes) :
         self._attributes_register(OUTPUT_DATA,   None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
 
 
-    def bind(self, resource, cores):
+    def bind(self, resource):
         """Binds a class:`radical.ensemblemd.mdkernels.MDTaskDescription` to a 
            specific resource. The resulting class:`radical.ensemblemd.mdkernels.BoundMDTask`
            contains the description of executables and arguments necessary to 
            execute the MDTask on the specified resource.
         """
-        bmds = BoundMDTask(
-            _executable=None, 
-            _arguments=[], 
-            _resource=resource, 
-            _input_data=[], 
-            _output_data=[]
-        )
 
-        return bmds
+        try: 
+          kernel = kerneldict[self.kernel][resource]
+
+          bmds = BoundMDTask(
+              _environment=  kernel['environment'],
+              _pre_exec=     kernel['pre_exec'],
+              _executable=   kernel['executable'], 
+              _arguments=    self.arguments, 
+              _resource=     resource, 
+              _input_data=   self.input_data, 
+              _output_data=  self.output_data
+          )
+
+          return bmds
+
+        except Exception, ex:
+          logger.error("Couldn't bind MDTaskDescription to resource '{0}': {1}".format(resource, str(ex)))
+          raise ex
 

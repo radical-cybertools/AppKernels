@@ -35,25 +35,24 @@ class MDKernelTestCases(unittest.TestCase):
 
         assert kerneldict != {}
         assert "TEST" in kerneldict, "Missing key in kernel dict"
-        assert "test.host.01" in kerneldict["TEST"]
+        assert "localhost" in kerneldict["TEST"]
         assert "test.host.02" in kerneldict["TEST"]
 
     #-------------------------------------------------------------------------
     #
-    def test__one(self):
-        """ Test ONE.
+    def test__binding(self):
+        """ Test the abstract MDTask -> resource binding.
         """
         from radical.ensemblemd.mdkernels import MDTaskDescription
 
         r1 = MDTaskDescription()
-        r1.kernel = "NAMD"
-        r1.arguments = ["-a1", "-b2", "-c2"]
+        r1.kernel = "TEST"
+        r1.arguments = ["-f"]
 
-        r1_bound = r1.bind(resource="stampede.tacc.utexas.edu", cores=16)
-        print r1_bound.executable
-        print r1_bound.arguments
-        print r1_bound.resource
-        print r1_bound.input_data
-        print r1_bound.output_data
-
-
+        r1_bound = r1.bind(resource="localhost")
+        assert r1_bound.pre_exec   == "/bin/echo -n TEST:localhost"
+        assert r1_bound.executable == "/bin/hostname"
+        assert r1_bound.arguments   == r1.arguments
+        assert r1_bound.resource   == "localhost"
+        #assert r1_bound.input_data
+        #assert r1_bound.output_data
