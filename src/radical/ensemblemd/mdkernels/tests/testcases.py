@@ -28,6 +28,18 @@ class MDKernelTestCases(unittest.TestCase):
 
     #-------------------------------------------------------------------------
     #
+    def test__loader(self):
+        """ Test the _KernelLoader.
+        """
+        from radical.ensemblemd.mdkernels.loader import kerneldict
+
+        assert kerneldict != {}
+        assert "MMPBSA" in kerneldict, "Missing key in kernel dict"
+        assert "GROMACS" in kerneldict, "Missing key in kernel dict"
+        assert "NAMD" in kerneldict, "Missing key in kernel dict"
+
+    #-------------------------------------------------------------------------
+    #
     def test__one(self):
         """ Test ONE.
         """
