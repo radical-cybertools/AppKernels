@@ -1,10 +1,12 @@
-__copyright__ = "Copyright 2013-2014, http://radical.rutgers.edu"
+__copyright__ = "Copyright 2014, http://radical.rutgers.edu"
 __license__   = "MIT"
+__author__    = "Ole Weidner <ole.weidner@rutgers.edu>"
 
+from logger            import logger
 import saga.attributes as attributes
 
 # ------------------------------------------------------------------------------
-# MDStepDescription attribute description keys
+# MDTaskDescription attribute description keys
 KERNEL                 = 'kernel'
 MIN_VERSION            = 'min_version'
 ARGUMENTS              = 'arguments'
@@ -12,14 +14,14 @@ INPUT_DATA             = 'input_data'
 OUTPUT_DATA            = 'output_data'
 
 # ------------------------------------------------------------------------------
-# Additional BoundMDStep attribute description keys
+# Additional BoundMDTask attribute description keys
 EXECUTABLE             = 'executable'
 RESOURCE               = 'resource'
 
 # ------------------------------------------------------------------------------
 #
-class BoundMDStep(attributes.Attributes) :
-    """A BoundMDStep object is a read-only data-strucutre that defines specific 
+class BoundMDTask(attributes.Attributes) :
+    """A BoundMDTask object is a read-only data-strucutre that defines specific 
        executables and arguments for an MD kernel / engine invocation on a 
        specific resource.
 
@@ -33,7 +35,7 @@ class BoundMDStep(attributes.Attributes) :
 
     .. data:: resource 
 
-       (`Attribute`) The resource this BoundMDStep was bound to (`string`).
+       (`Attribute`) The resource this BoundMDTask was bound to (`string`).
 
     .. data:: input_data 
 
@@ -64,11 +66,11 @@ class BoundMDStep(attributes.Attributes) :
 
 # ------------------------------------------------------------------------------
 #
-class MDStepDescription(attributes.Attributes) :
-    """An MDStepDescription object describes a single MD step (kernel / engine
+class MDTaskDescription(attributes.Attributes) :
+    """An MDTaskDescription object describes a single MD step (kernel / engine
        invocation) independently from any system specifics, like paths, etc.
 
-    .. note:: An MDStepDescription **MUST** define at least a :data:`kernel` and
+    .. note:: An MDTaskDescription **MUST** define at least a :data:`kernel` and
               a list of :data:`attributes`.
 
     **Example**::
@@ -120,10 +122,10 @@ class MDStepDescription(attributes.Attributes) :
 
 
     def bind(self, resource, cores):
-        """Binds a class:`radical.ensemblemd.mdkernels.MDStepDescription` to a 
-           specific resource. The resulting class:`radical.ensemblemd.mdkernels.BoundMDStep`
+        """Binds a class:`radical.ensemblemd.mdkernels.MDTaskDescription` to a 
+           specific resource. The resulting class:`radical.ensemblemd.mdkernels.BoundMDTask`
            contains the description of executables and arguments necessary to 
-           execute the MDStep on the specified resource.
+           execute the MDTask on the specified resource.
         """
         bmds = BoundMDStep(
             _executable=None, 

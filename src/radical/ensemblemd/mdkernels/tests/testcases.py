@@ -31,7 +31,7 @@ class MDKernelTestCases(unittest.TestCase):
     def test__one(self):
         """ Test ONE.
         """
-        from radical.ensemblemd.mdkernels import MDStepDescription
+        from radical.ensemblemd.mdkernels import MDTaskDescription
 
         r1 = MDStepDescription()
         r1.kernel = "NAMD"
