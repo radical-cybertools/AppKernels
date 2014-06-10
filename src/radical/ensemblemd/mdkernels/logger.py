@@ -18,7 +18,7 @@ class _MPLogger(object):
         """Create or get a new logger instance (singleton).
         """
         self._logger = rul.logger.getLogger(name='radical.ensemblemd')
-        mp_formatter = Formatter(fmt='%(asctime)s %(name)s: [%(levelname)-8s] %(message)s', 
+        mp_formatter = Formatter(fmt='%(asctime)s %(name)sg: [%(levelname)-8s] %(message)s', 
                                  datefmt='%Y:%m:%d %H:%M:%S')
 
 #        mp_formatter = Formatter(fmt='%(asctime)s %(name)s.%(processName)s: [%(levelname)-8s] %(message)s', 
