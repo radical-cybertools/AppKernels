@@ -3,8 +3,7 @@
     "kernel_configs": {
 
         "stampede.tacc.utexas.edu": {
-            "environment"   : {},
-            "pre_exec"      : ["module load TACC amber intel mvapich2"],
+            "pre_exec"      : ["module load amber"],
             "executable"    : "/opt/apps/intel13/mvapich2_1_9/amber/12.0/bin/MMPBSA.py",
             "uses_mpi"      : "True"
         }

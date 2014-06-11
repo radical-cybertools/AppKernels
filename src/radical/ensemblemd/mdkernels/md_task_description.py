@@ -143,8 +143,13 @@ class MDTaskDescription(attributes.Attributes) :
           else:
               uses_mpi = False
 
+          if 'environment' in kernel:
+              environemnt = kernel['environment']
+          else:
+              environment = None
+
           bmds = BoundMDTask(
-              _environment = kernel['environment'],
+              _environment = environment,
               _pre_exec    = kernel['pre_exec'],
               _executable  = kernel['executable'], 
               _mpi         = uses_mpi,
