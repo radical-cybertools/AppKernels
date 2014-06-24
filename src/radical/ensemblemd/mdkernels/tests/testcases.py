@@ -85,10 +85,10 @@ class MDKernelTestCases(unittest.TestCase):
         r1.kernel = "TEST"
         r1.arguments = ["-f"]
         r1.copy_local_input_data = ["file1", "file2", "file3"]
-        r1.cleanup_input_data = True
+        r1.purge = True
 
         r1_bound = r1.bind(resource="localhost")
 
         assert r1_bound.pre_exec == [u'/bin/echo -n TEST:localhost', 'cp file1 .', 'cp file2 .', 'cp file3 .']
-        assert r1_bound.post_exec == ['rm file1', 'rm file2', 'rm file3']
+        assert r1_bound.post_exec == ['rm -rf *']
 

@@ -14,7 +14,7 @@ ARGUMENTS              = 'arguments'
 INPUT_DATA             = 'input_data'
 OUTPUT_DATA            = 'output_data'
 COPY_LOCAL_INPUT_DATA  = 'copy_local_input_data'
-CLEANUP_INPUT_DATA     = 'cleanup_input_data'
+PURGE                  = 'purge'
 
 # ------------------------------------------------------------------------------
 # Additional BoundMDTask attribute description keys
@@ -131,7 +131,7 @@ class MDTaskDescription(attributes.Attributes) :
         self._attributes_register(INPUT_DATA,            None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
         self._attributes_register(OUTPUT_DATA,           None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
         self._attributes_register(COPY_LOCAL_INPUT_DATA, None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
-        self._attributes_register(CLEANUP_INPUT_DATA,    None, attributes.BOOL,   attributes.SCALAR, attributes.WRITEABLE)
+        self._attributes_register(PURGE,                 None, attributes.BOOL,   attributes.SCALAR, attributes.WRITEABLE)
 
     def bind(self, resource):
         """Binds a class:`radical.ensemblemd.mdkernels.MDTaskDescription` to a 
@@ -165,9 +165,8 @@ class MDTaskDescription(attributes.Attributes) :
               for lid in self.copy_local_input_data:
                   pre_exec.append("cp {0} .".format(lid))
 
-          if self.cleanup_input_data is not None:
-              for lid in self.copy_local_input_data:
-                  post_exec.append("rm {0}".format(lid))
+          if self.purge is True:
+              post_exec.append("rm -rf *")
 
           bmds = BoundMDTask(
               _environment = environment,
