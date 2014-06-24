@@ -50,9 +50,26 @@ class MDKernelTestCases(unittest.TestCase):
         r1.arguments = ["-f"]
 
         r1_bound = r1.bind(resource="localhost")
-        assert r1_bound.pre_exec   == "/bin/echo -n TEST:localhost"
+        print r1_bound.pre_exec
+        assert r1_bound.pre_exec   == ["/bin/echo -n TEST:localhost"]
         assert r1_bound.executable == "/bin/hostname"
         assert r1_bound.arguments   == r1.arguments
         assert r1_bound.resource   == "localhost"
         #assert r1_bound.input_data
         #assert r1_bound.output_data
+
+    #-------------------------------------------------------------------------
+    #
+    def test__copy_local_data(self):
+        """ Test if copying of local data is handled properly.
+        """
+        from radical.ensemblemd.mdkernels import MDTaskDescription
+
+        r1 = MDTaskDescription()
+        r1.kernel = "TEST"
+        r1.arguments = ["-f"]
+        r1.copy_local_input_data = ["file1", "file2", "file3"]
+
+        r1_bound = r1.bind(resource="localhost")
+
+        assert r1_bound.pre_exec == [u'/bin/echo -n TEST:localhost', 'cp file1 .', 'cp file2 .', 'cp file3 .']

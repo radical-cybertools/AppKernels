@@ -13,6 +13,7 @@ MIN_VERSION            = 'min_version'
 ARGUMENTS              = 'arguments'
 INPUT_DATA             = 'input_data'
 OUTPUT_DATA            = 'output_data'
+COPY_LOCAL_INPUT_DATA  = 'copy_local_input_data'
 
 # ------------------------------------------------------------------------------
 # Additional BoundMDTask attribute description keys
@@ -62,14 +63,14 @@ class BoundMDTask(attributes.Attributes) :
         self._attributes_camelcasing (True)
 
         # register properties with the attribute interface
-        self._attributes_register(ENVIRONMENT,   _environment, attributes.STRING, attributes.VECTOR, attributes.READONLY)
-        self._attributes_register(PRE_EXEC,      _pre_exec,    attributes.STRING, attributes.SCALAR, attributes.READONLY)
-        self._attributes_register(EXECUTABLE,    _executable,  attributes.STRING, attributes.SCALAR, attributes.READONLY)
-        self._attributes_register(MPI,           _mpi,         attributes.BOOL,   attributes.SCALAR, attributes.READONLY)
-        self._attributes_register(ARGUMENTS,     _arguments,   attributes.STRING, attributes.VECTOR, attributes.READONLY)
-        self._attributes_register(RESOURCE,      _resource,    attributes.STRING, attributes.SCALAR, attributes.READONLY)
-        self._attributes_register(INPUT_DATA,    _input_data,  attributes.STRING, attributes.VECTOR, attributes.READONLY)
-        self._attributes_register(OUTPUT_DATA,   _output_data, attributes.STRING, attributes.VECTOR, attributes.READONLY)
+        self._attributes_register(ENVIRONMENT,             _environment,            attributes.STRING, attributes.VECTOR, attributes.READONLY)
+        self._attributes_register(PRE_EXEC,                _pre_exec,               attributes.STRING, attributes.SCALAR, attributes.READONLY)
+        self._attributes_register(EXECUTABLE,              _executable,             attributes.STRING, attributes.SCALAR, attributes.READONLY)
+        self._attributes_register(MPI,                     _mpi,                    attributes.BOOL,   attributes.SCALAR, attributes.READONLY)
+        self._attributes_register(ARGUMENTS,               _arguments,              attributes.STRING, attributes.VECTOR, attributes.READONLY)
+        self._attributes_register(RESOURCE,                _resource,               attributes.STRING, attributes.SCALAR, attributes.READONLY)
+        self._attributes_register(INPUT_DATA,              _input_data,             attributes.STRING, attributes.VECTOR, attributes.READONLY)
+        self._attributes_register(OUTPUT_DATA,             _output_data,            attributes.STRING, attributes.VECTOR, attributes.READONLY)
 
 # ------------------------------------------------------------------------------
 #
@@ -121,12 +122,12 @@ class MDTaskDescription(attributes.Attributes) :
         self._attributes_camelcasing (True)
 
         # register properties with the attribute interface
-        self._attributes_register(KERNEL,        None, attributes.STRING, attributes.SCALAR, attributes.WRITEABLE)
-        self._attributes_register(ARGUMENTS,     None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
-        self._attributes_register(MIN_VERSION,   None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
-        self._attributes_register(INPUT_DATA,    None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
-        self._attributes_register(OUTPUT_DATA,   None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
-
+        self._attributes_register(KERNEL,                None, attributes.STRING, attributes.SCALAR, attributes.WRITEABLE)
+        self._attributes_register(ARGUMENTS,             None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
+        self._attributes_register(MIN_VERSION,           None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
+        self._attributes_register(INPUT_DATA,            None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
+        self._attributes_register(OUTPUT_DATA,           None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
+        self._attributes_register(COPY_LOCAL_INPUT_DATA, None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
 
     def bind(self, resource):
         """Binds a class:`radical.ensemblemd.mdkernels.MDTaskDescription` to a 
@@ -144,13 +145,24 @@ class MDTaskDescription(attributes.Attributes) :
               uses_mpi = False
 
           if 'environment' in kernel:
-              environemnt = kernel['environment']
+              environment = kernel['environment']
           else:
               environment = None
 
+          pre_exec = []
+
+          # Process pre-execution stuff          
+          if kernel['pre_exec'] is not None:
+            pre_exec.extend(kernel['pre_exec'])
+
+          # Process local input file copy as part of pre-execution
+          if self.copy_local_input_data is not None:
+              for lid in self.copy_local_input_data:
+                  pre_exec.append("cp {0} .".format(lid))
+
           bmds = BoundMDTask(
               _environment = environment,
-              _pre_exec    = kernel['pre_exec'],
+              _pre_exec    = pre_exec,
               _executable  = kernel['executable'], 
               _mpi         = uses_mpi,
               _arguments   = self.arguments, 
