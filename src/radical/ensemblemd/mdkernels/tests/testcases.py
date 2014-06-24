@@ -73,3 +73,22 @@ class MDKernelTestCases(unittest.TestCase):
         r1_bound = r1.bind(resource="localhost")
 
         assert r1_bound.pre_exec == [u'/bin/echo -n TEST:localhost', 'cp file1 .', 'cp file2 .', 'cp file3 .']
+
+    #-------------------------------------------------------------------------
+    #
+    def test__cleanup_local_data(self):
+        """ Test if copying of local data is handled properly.
+        """
+        from radical.ensemblemd.mdkernels import MDTaskDescription
+
+        r1 = MDTaskDescription()
+        r1.kernel = "TEST"
+        r1.arguments = ["-f"]
+        r1.copy_local_input_data = ["file1", "file2", "file3"]
+        r1.cleanup_input_data = True
+
+        r1_bound = r1.bind(resource="localhost")
+
+        assert r1_bound.pre_exec == [u'/bin/echo -n TEST:localhost', 'cp file1 .', 'cp file2 .', 'cp file3 .']
+        assert r1_bound.post_exec == ['rm file1', 'rm file2', 'rm file3']
+

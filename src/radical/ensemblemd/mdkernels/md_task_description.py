@@ -14,11 +14,13 @@ ARGUMENTS              = 'arguments'
 INPUT_DATA             = 'input_data'
 OUTPUT_DATA            = 'output_data'
 COPY_LOCAL_INPUT_DATA  = 'copy_local_input_data'
+CLEANUP_INPUT_DATA     = 'cleanup_input_data'
 
 # ------------------------------------------------------------------------------
 # Additional BoundMDTask attribute description keys
 ENVIRONMENT            = 'environment'
 PRE_EXEC               = 'pre_exec'
+POST_EXEC              = 'post_exec'
 EXECUTABLE             = 'executable'
 MPI                    = 'mpi'
 RESOURCE               = 'resource'
@@ -51,7 +53,7 @@ class BoundMDTask(attributes.Attributes) :
        (`Attribute`) The output files that need to be transferred back after execution (`transfer directive string`).
 
     """
-    def __init__(self, _environment, _pre_exec, _executable, _mpi, _arguments, _resource, _input_data, _output_data):
+    def __init__(self, _environment, _pre_exec, _post_exec, _executable, _mpi, _arguments, _resource, _input_data, _output_data):
         """Le constructeur.
         """ 
 
@@ -65,6 +67,7 @@ class BoundMDTask(attributes.Attributes) :
         # register properties with the attribute interface
         self._attributes_register(ENVIRONMENT,             _environment,            attributes.STRING, attributes.VECTOR, attributes.READONLY)
         self._attributes_register(PRE_EXEC,                _pre_exec,               attributes.STRING, attributes.SCALAR, attributes.READONLY)
+        self._attributes_register(POST_EXEC,               _post_exec,              attributes.STRING, attributes.SCALAR, attributes.READONLY)
         self._attributes_register(EXECUTABLE,              _executable,             attributes.STRING, attributes.SCALAR, attributes.READONLY)
         self._attributes_register(MPI,                     _mpi,                    attributes.BOOL,   attributes.SCALAR, attributes.READONLY)
         self._attributes_register(ARGUMENTS,               _arguments,              attributes.STRING, attributes.VECTOR, attributes.READONLY)
@@ -128,6 +131,7 @@ class MDTaskDescription(attributes.Attributes) :
         self._attributes_register(INPUT_DATA,            None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
         self._attributes_register(OUTPUT_DATA,           None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
         self._attributes_register(COPY_LOCAL_INPUT_DATA, None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
+        self._attributes_register(CLEANUP_INPUT_DATA,    None, attributes.BOOL,   attributes.SCALAR, attributes.WRITEABLE)
 
     def bind(self, resource):
         """Binds a class:`radical.ensemblemd.mdkernels.MDTaskDescription` to a 
@@ -150,6 +154,7 @@ class MDTaskDescription(attributes.Attributes) :
               environment = None
 
           pre_exec = []
+          post_exec = []
 
           # Process pre-execution stuff          
           if kernel['pre_exec'] is not None:
@@ -160,9 +165,14 @@ class MDTaskDescription(attributes.Attributes) :
               for lid in self.copy_local_input_data:
                   pre_exec.append("cp {0} .".format(lid))
 
+          if self.cleanup_input_data is not None:
+              for lid in self.copy_local_input_data:
+                  post_exec.append("rm {0}".format(lid))
+
           bmds = BoundMDTask(
               _environment = environment,
               _pre_exec    = pre_exec,
+              _post_exec   = post_exec,
               _executable  = kernel['executable'], 
               _mpi         = uses_mpi,
               _arguments   = self.arguments, 
