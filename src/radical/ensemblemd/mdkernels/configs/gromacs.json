@@ -8,7 +8,7 @@
             "environment" : {},
             "pre_exec"    : ["module load TACC && module load gromacs"],
             "executable"  : ["/bin/bash"]
-        }
+        },
         "sierra.futuregrid.org":
         {
             "environment" : {},
