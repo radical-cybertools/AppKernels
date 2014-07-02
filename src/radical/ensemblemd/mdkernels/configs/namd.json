@@ -9,6 +9,11 @@
         "india.futuregrid.org": {
             "executable"    : "/N/u/marksant/software/bin/namd2",
             "uses_mpi"      : "True"
+        },
+        "archer.ac.uk": {
+            "pre_exec"      : ["module load namd"],
+            "executable"    : "/usr/local/packages/namd/namd-2.9/bin/namd2",
+            "uses_mpi"      : "True"
         }
     }
 }
