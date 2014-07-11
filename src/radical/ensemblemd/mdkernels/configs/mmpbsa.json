@@ -10,7 +10,7 @@
 
         "archer.ac.uk": {
             "pre_exec"      : ["module load amber"],
-            "executable"    : "/bin/false",
+            "executable"    : "//work/y07/y07/amber/12/bin/MMPBSA.py.MPI",
             "uses_mpi"      : "True"
         }
     }
