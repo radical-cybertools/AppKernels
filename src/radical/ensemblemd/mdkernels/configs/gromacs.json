@@ -18,7 +18,7 @@
         "trestles.sdsc.xsede.org":
         {
             "environment" : {},
-            "pre_exec"    : ["module load gromacs && mkdir $HOME/bin && export PATH=$PATH:$HOME/bin && cd $HOME/bin && ln -s /opt/gromacs/bin/grompp_mpi grompp && ln -s /opt/gromacs/bin/mdrun_mpi mdrun"],
+            "pre_exec"    : ["mkdir $HOME/bin && export PATH=$PATH:$HOME/bin && cd $HOME/bin && ln -s /opt/gromacs/bin/grompp_mpi grompp && ln -s /opt/gromacs/bin/mdrun_mpi mdrun"],
             "executable"  : ["/bin/bash"]
         }
     }
