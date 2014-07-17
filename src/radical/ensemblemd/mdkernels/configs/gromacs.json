@@ -14,7 +14,7 @@
             "environment" : {},
             "pre_exec"    : ["export PATH=$PATH:~marksant/bin"],
             "executable"  : ["/bin/bash"]
-        }
+        },
         "trestles.sdsc.xsede.org":
         {
             "environment" : {},
