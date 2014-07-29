@@ -7,6 +7,12 @@
             "environment" : {},
             "pre_exec" : ["module load python","module load scipy","module load mpi4py","(test -d $HOME/lsdmap || (git clone https://github.com/jp43/lsdmap.git $HOME/lsdmap && python $HOME/lsdmap/setup.py install --user))","export PATH=$PATH:$HOME/lsdmap/bin","chmod +x $HOME/lsdmap/bin/lsdmap"],
             "executable" : ["/bin/bash"]
+        },
+        "stampede.tacc.utexas.edu":
+        {
+            "environment" : {},
+            "pre_exec" : ["module load -intel +intel/14.0.1.106","module load python","(test -d $HOME/lsdmap || (git clone https://github.com/jp43/lsdmap.git $HOME/lsdmap && python $HOME/lsdmap/setup.py install --user))","export PATH=$PATH:$HOME/lsdmap/bin","chmod +x $HOME/lsdmap/bin/lsdmap"],
+            "executable" : ["/bin/bash"]
         }
     }
 }
