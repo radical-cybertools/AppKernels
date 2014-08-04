@@ -1,0 +1,35 @@
+{
+    "kernel_name": "SLEEP",
+    "kernel_configs": {
+
+        "localhost": {
+            "environment"   : {},
+            "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
+            "executable"    : "/bin/sleep"
+        },
+        "test.host.02": {
+            "environment"   : {},
+            "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
+            "executable"    : "/bin/sleep"
+        },
+        "stampede.tacc.utexas.edu": 
+        {
+            "environment"   : {},
+            "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
+            "executable"    : "/bin/sleep"
+        },
+        "india.futuregrid.org":
+        {
+            "environment"   : {},
+            "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
+            "executable"    : "/bin/sleep"
+        }
+        "sierra.futuregrid.org":
+        {
+            "environment"   : {},
+            "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
+            "executable"    : "/bin/sleep"
+        }
+    }
+}
+
