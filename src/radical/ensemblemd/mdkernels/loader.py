@@ -28,6 +28,7 @@ class _KernelDict(object):
         try: 
             for f in config_files:
                 logger.info("Loading kernel configurations from {0}".format(f))
+                print("Loading kernel configurations from {0}".format(f))
 
                 # load file into a dictionary
                 json_data=open(f)
