@@ -1,19 +1,54 @@
 {
     "kernel_name": "GROMACS",
-    "kernel_configs": 
-    {
+    "kernel_configs": {
 
-        "stampede.tacc.utexas.edu": 
-        {
-            "environment" : {},
-            "pre_exec"    : ["module load TACC && module load gromacs"],
-            "executable"  : ["/bin/bash"]
+        "stampede.tacc.utexas.edu": {
+            "pre_exec"      : ["module load gromacs"],
+            "executable"    : "mdrun_mpi",
+            "uses_mpi"      : "True"
         },
-        "sierra.futuregrid.org":
-        {
-            "environment" : {},
-            "pre_exec"    : ["export PATH=$PATH:~marksant/bin"],
-            "executable"  : ["/bin/bash"]
+
+        "trestles.sdsc.xsede.org": {
+            "pre_exec"      : ["module load gromacs"],
+            "executable"    : "mdrun_mpi",
+            "uses_mpi"      : "True"
+        },
+
+        "gordon.sdsc.xsede.org": {
+            "pre_exec"      : ["module load gromacs"],
+            "executable"    : "mdrun_mpi",
+            "uses_mpi"      : "True"
+        },
+
+        "blacklight.psc.xsede.org": {
+            "pre_exec"      : ["module load gromacs"],
+            "executable"    : "mdrun_mpi",
+            "uses_mpi"      : "True"
+        },
+
+        "india.futuregrid.org": {
+            "executable"    : "/N/u/marksant/bin/mdrun",
+            "uses_mpi"      : "False"
+        },
+
+        "sierra.futuregrid.org": {
+            "executable"    : "/N/u/marksant/bin/mdrun",
+            "uses_mpi"      : "False"
+        },
+
+        "india.futuregrid.org": {
+            "executable"    : "/N/u/marksant/bin/mdrun",
+            "uses_mpi"      : "False"
+        },
+
+        "hotel.futuregrid.org": {
+            "executable"    : "/N/u/marksant/bin/mdrun",
+            "uses_mpi"      : "False"
+        },
+
+        "alamo.futuregrid.org": {
+            "executable"    : "/N/u/marksant/bin/mdrun",
+            "uses_mpi"      : "False"
         }
     }
 }
