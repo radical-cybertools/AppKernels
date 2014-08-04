@@ -3,32 +3,56 @@
     "kernel_configs": {
 
         "localhost": {
-            "environment"   : {},
             "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
             "executable"    : "/bin/sleep"
         },
-        "test.host.02": {
-            "environment"   : {},
+        
+        "stampede.tacc.utexas.edu": {
             "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
-            "executable"    : "/bin/sleep"
+            "executable"    : "/bin/sleep",
+            "uses_mpi"      : "False"
         },
-        "stampede.tacc.utexas.edu": 
-        {
-            "environment"   : {},
+
+        "trestles.sdsc.xsede.org": {
             "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
-            "executable"    : "/bin/sleep"
+            "executable"    : "/bin/sleep",
+            "uses_mpi"      : "False"
         },
-        "india.futuregrid.org":
-        {
-            "environment"   : {},
+
+        "gordon.sdsc.xsede.org": {
             "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
-            "executable"    : "/bin/sleep"
-        }
-        "sierra.futuregrid.org":
-        {
-            "environment"   : {},
+            "executable"    : "/bin/sleep",
+            "uses_mpi"      : "False"
+        },
+
+        "blacklight.psc.xsede.org": {
             "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
-            "executable"    : "/bin/sleep"
+            "executable"    : "/bin/sleep",
+            "uses_mpi"      : "False"
+        },
+
+        "india.futuregrid.org": {
+            "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
+            "executable"    : "/bin/sleep",
+            "uses_mpi"      : "False"
+        },
+
+        "sierra.futuregrid.org": {
+            "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
+            "executable"    : "/bin/sleep",
+            "uses_mpi"      : "False"
+        },
+
+        "hotel.futuregrid.org": {
+            "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
+            "executable"    : "/bin/sleep",
+            "uses_mpi"      : "False"
+        },
+
+        "alamo.futuregrid.org": {
+            "pre_exec"      : ['/bin/echo "testing on `hostname`"'],
+            "executable"    : "/bin/sleep",
+            "uses_mpi"      : "False"
         }
     }
 }

@@ -36,11 +36,6 @@
             "uses_mpi"      : "False"
         },
 
-        "india.futuregrid.org": {
-            "executable"    : "/N/u/marksant/bin/mdrun",
-            "uses_mpi"      : "False"
-        },
-
         "hotel.futuregrid.org": {
             "executable"    : "/N/u/marksant/bin/mdrun",
             "uses_mpi"      : "False"
@@ -52,3 +47,4 @@
         }
     }
 }
+
