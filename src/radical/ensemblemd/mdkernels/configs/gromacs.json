@@ -16,7 +16,7 @@
 
         "gordon.sdsc.xsede.org": {
             "pre_exec"      : ["module load gromacs"],
-            "executable"    : "mdrun_mpi",
+            "executable"    : "/opt/gromacs/bin/mdrun_mpi",
             "uses_mpi"      : "True"
         },
 
