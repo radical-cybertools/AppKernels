@@ -1,5 +1,5 @@
 {
-  "kernel_name": "AMBER",
+  "kernel_name": "CoCo",
   "kernel_configs":
   {
     "stampede.tacc.utexas.edu":
