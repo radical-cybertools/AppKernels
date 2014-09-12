@@ -1,0 +1,18 @@
+{
+  "kernel_name": "AMBER",
+  "kernel_configs":
+  {
+    "stampede.tacc.utexas.edu":
+    {
+      "environment" : {},
+      "pre_exec" : ["module load TACC && module load python && module load mpi4py && module load amber"],
+      "executable" : ["/bin/bash"]
+    },
+    "archer.ac.uk":
+    {
+      "environment" : {},
+      "pre_exec" : ["module load python && source /fs4/e290/e290/vb224/myenv/bin/activate && module load numpy && module load scipy && module load amber"],
+      "executable" : ["/bin/bash"]
+    }
+  }
+}
