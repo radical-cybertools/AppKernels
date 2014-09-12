@@ -24,7 +24,7 @@
         "archer.ac.uk":
         {
             "environment" : {},
-            "pre_exec"    : ["module load gromacs"],
+            "pre_exec"    : ["module load packages-archer","module load gromacs"],
             "executable"  : ["/bin/bash"]
         }
     }
