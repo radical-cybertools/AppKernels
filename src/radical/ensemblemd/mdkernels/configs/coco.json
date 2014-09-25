@@ -1,0 +1,18 @@
+{
+  "kernel_name": "CoCo",
+  "kernel_configs":
+  {
+    "stampede.tacc.utexas.edu":
+    {
+      "environment" : {},
+      "pre_exec" : ["module load TACC && module load python && module load mpi4py && module load amber"],
+      "executable" : ["/bin/bash"]
+    },
+    "archer.ac.uk":
+    {
+      "environment" : {},
+      "pre_exec" : ["module load python && module load numpy && module load scipy && module load coco && module load amber"],
+      "executable" : ["/bin/bash"]
+    }
+  }
+}

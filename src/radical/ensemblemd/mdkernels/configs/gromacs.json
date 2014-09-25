@@ -8,13 +8,13 @@
             "uses_mpi"      : "True"
         },
 
-        "trestles.sdsc.xsede.org": {
-            "pre_exec"      : ["module load gromacs",
-                               "export MV2_ENABLE_AFFINITY=0"
-                              ],
-            "executable"    : "/opt/gromacs/bin/mdrun_mpi",
-            "uses_mpi"      : "True"
-        },
+        // "trestles.sdsc.xsede.org": {
+        //     "pre_exec"      : ["module load gromacs",
+        //                        "export MV2_ENABLE_AFFINITY=0"
+        //                       ],
+        //     "executable"    : "/opt/gromacs/bin/mdrun_mpi",
+        //     "uses_mpi"      : "True"
+        // },
 
         "gordon.sdsc.xsede.org": {
             "pre_exec"      : ["module load gromacs",
@@ -30,24 +30,23 @@
             "uses_mpi"      : "True"
         },
 
-        "india.futuregrid.org": {
-            "executable"    : "/N/u/marksant/bin/mdrun",
-            "uses_mpi"      : "False"
+        "sierra.futuregrid.org":
+        {
+            "environment" : {},
+            "pre_exec"    : ["export PATH=$PATH:~marksant/bin"],
+            "executable"  : ["/bin/bash"]
         },
-
-        "sierra.futuregrid.org": {
-            "executable"    : "/N/u/marksant/bin/mdrun",
-            "uses_mpi"      : "False"
+        "trestles.sdsc.xsede.org":
+        {
+            "environment" : {},
+            "pre_exec"    : ["(test -d $HOME/bin || mkdir $HOME/bin)","export PATH=$PATH:$HOME/bin","module load gromacs","ln -s /opt/gromacs/bin/grompp_mpi $HOME/bin/grompp && ln -s /opt/gromacs/bin/mdrun_mpi $HOME/bin/mdrun"],
+            "executable"  : ["/bin/bash"]
         },
-
-        "hotel.futuregrid.org": {
-            "executable"    : "/N/u/marksant/bin/mdrun",
-            "uses_mpi"      : "False"
-        },
-
-        "alamo.futuregrid.org": {
-            "executable"    : "/N/u/marksant/bin/mdrun",
-            "uses_mpi"      : "False"
+        "archer.ac.uk":
+        {
+            "environment" : {},
+            "pre_exec"    : ["module load packages-archer","module load gromacs"],
+            "executable"  : ["/bin/bash"]
         }
     }
 }
