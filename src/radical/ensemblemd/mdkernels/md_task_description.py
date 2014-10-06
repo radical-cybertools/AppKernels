@@ -141,6 +141,9 @@ class MDTaskDescription(attributes.Attributes) :
         """
 
         try: 
+          if resource.endswith(":local"):
+              resource = resource.replace(":local", "")
+
           kernel = kerneldict[self.kernel][resource]
 
           if 'uses_mpi' in kernel:
