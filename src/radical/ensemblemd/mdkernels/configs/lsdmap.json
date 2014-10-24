@@ -17,7 +17,7 @@
         "archer.ac.uk":
         {
             "environment" : {},
-            "pre_exec" : ["module load python","module load numpy","module load scipy"," module load lsdmap"],
+            "pre_exec" : ["module load python","module load numpy","module load scipy"," module load lsdmap/0.1-rc2"],
             "executable" : ["/bin/bash"]
         }
     }
