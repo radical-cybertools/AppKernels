@@ -12,13 +12,13 @@
         {
             "environment" : {},
             "pre_exec" : ["module load -intel +intel/14.0.1.106","module load python"],
-            "executable" : ["/bin/bash"]
+            "executable" : ["python"]
         },
         "archer.ac.uk":
         {
             "environment" : {},
             "pre_exec" : ["module load python","module load numpy","module load scipy"," module load lsdmap","export PYTHONPATH=/work/y07/y07/cse/lsdmap/lib/python2.7/site-packages:$PYTHONPATH"],
-            "executable" : ["/bin/bash"]
+            "executable" : ["python"]
         }
     }
 }
