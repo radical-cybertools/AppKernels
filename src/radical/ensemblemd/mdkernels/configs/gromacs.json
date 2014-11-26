@@ -3,7 +3,7 @@
     "kernel_configs": {
 
         "stampede.tacc.utexas.edu": {
-            "pre_exec"      : ["module load gromacs"],
+            "pre_exec"      : ["module load gromacs python mpi4py"],
             "executable"    : "mdrun_mpi",
             "uses_mpi"      : "True"
         },
