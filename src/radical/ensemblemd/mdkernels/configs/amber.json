@@ -6,13 +6,13 @@
     {
       "environment" : {},
       "pre_exec" : ["module load TACC && module load amber"],
-      "executable" : ["/bin/bash"]
+      "executable" : ["pmemd.MPI"]
     },
     "archer.ac.uk":
     {
       "environment" : {},
       "pre_exec" : ["module load packages-archer","module load amber"],
-      "executable" : ["/bin/bash"]
+      "executable" : ["pmemd.MPI"]
     }
   }
 }
