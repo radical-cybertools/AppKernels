@@ -13,6 +13,12 @@
       "environment" : {},
       "pre_exec" : ["module load packages-archer","module load amber"],
       "executable" : ["pmemd.MPI"]
+    },
+    "biou.rice.edu":
+    {
+      "environment" : {},
+      "pre_exec" : ["module load amber"],
+      "executable" : ["pmemd.MPI"]
     }
   }
 }
