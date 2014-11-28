@@ -13,6 +13,13 @@
             "executable"    : "/opt/gromacs/bin/mdrun_mpi",
             "uses_mpi"      : "True"
         },
+        
+        "biou.rice.edu":
+        {
+            "environment" : {},
+            "pre_exec" : ["module load gromacs python"],
+            "executable" : ["python"]
+        },
 
         "gordon.sdsc.xsede.org": {
             "pre_exec"      : ["module load gromacs",
