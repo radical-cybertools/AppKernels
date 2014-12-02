@@ -163,6 +163,9 @@ class MDTaskDescription(attributes.Attributes) :
           if 'pre_exec' in kernel and kernel['pre_exec'] is not None:
             pre_exec.extend(kernel['pre_exec'])
 
+          if 'post_exec' in kernel and kernel['post_exec'] is not None:
+            pre_exec.extend(kernel['post_exec'])
+
           # Process local input file copy as part of pre-execution
           if self.copy_local_input_data is not None:
               for lid in self.copy_local_input_data:
