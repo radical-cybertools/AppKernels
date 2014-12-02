@@ -19,7 +19,7 @@
         {
             "environment" : {},
             "pre_exec" : ["module load python","module load numpy","module load scipy"," module load lsdmap","export PYTHONPATH=/work/y07/y07/cse/lsdmap/lib/python2.7/site-packages:$PYTHONPATH"],
-            "executable" : ["python"]
+            "executable" : ["python"],
             "post_exec" : ["module load python numpy"]
         },
         "biou.rice.edu":
