@@ -5,7 +5,7 @@
     "stampede.tacc.utexas.edu":
     {
       "environment" : {},
-      "pre_exec" : ["module load intel/13.0.2.146","module load python","module load netcdf/4.3.2","module load hdf5/1.8.13","module load amber","export PYTHONPATH=/home1/01915/laughton/.public/lib/python2.7/site-packages:$PYTHONPATH","export PATH=/home1/01915/laughton/.public/bin:$PATH"],
+      "pre_exec" : ["module load intel/13.0.2.146","module load python","module load mpi4py","module load netcdf/4.3.2","module load hdf5/1.8.13","module load amber","export PYTHONPATH=/home1/01915/laughton/.public/lib/python2.7/site-packages:$PYTHONPATH","export PATH=/home1/01915/laughton/.public/bin:$PATH"],
       "executable" : ["/bin/bash"],
       "post_exec" : ["export PYTHONPATH=/home1/01915/laughton/.public/lib/python2.7/site-packages/extasy.coco-0.1-py2.7.egg:$PYTHONPATH"]
     },
