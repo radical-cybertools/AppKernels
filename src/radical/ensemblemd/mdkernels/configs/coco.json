@@ -12,7 +12,7 @@
     "archer.ac.uk":
     {
       "environment" : {},
-      "pre_exec" : ["module load python","module load numpy","module load scipy","module load coco","module load netcdf4-python","module load amber"],
+      "pre_exec" : ["module load python","module load numpy","module load scipy","module load coco/0.3","module load netcdf4-python","module load amber"],
       "executable" : ["/bin/bash"],
       "post_exec" : []
     }
