@@ -128,6 +128,7 @@ setup_args = {
                            'radical.ensemblemd.mdkernels',
                            'radical.ensemblemd.mdkernels.configs'],
     'package_dir' :       {'': 'src'},  
+    'scripts'          : ['bin/radical-ensemblemd-mdkernels-bind.py'],
 
     'package_data'     :  {'': ['*.sh', '*.json', 'VERSION', 'VERSION.git']},
     'install_requires' :  ['radical.utils'],
