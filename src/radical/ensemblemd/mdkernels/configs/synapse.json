@@ -1,0 +1,10 @@
+{
+    "kernel_name": "SYNAPSE",
+    "kernel_configs": {
+
+        "*": {
+            "executable"    : "synapse_profile"
+        }
+    }
+}
+
