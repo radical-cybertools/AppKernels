@@ -130,7 +130,7 @@ setup_args = {
     'package_dir' :       {'': 'src'},  
 
     'package_data'     :  {'': ['*.sh', '*.json', 'VERSION', 'VERSION.git']},
-    'install_requires' :  ['radical.utils', 'setuptools>=1'],
+    'install_requires' :  ['radical.utils'],
 
     'test_suite'       : 'radical.ensemblemd.mdkernels.tests',
 
