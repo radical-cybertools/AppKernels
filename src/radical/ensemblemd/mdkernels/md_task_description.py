@@ -144,7 +144,15 @@ class MDTaskDescription(attributes.Attributes) :
           if resource.endswith(":local"):
               resource = resource.replace(":local", "")
 
-          kernel = kerneldict[self.kernel][resource]
+          if resource in kerneldict[self.kernel]:
+              kernel = kerneldict[self.kernel][resource]
+          elif '*' in kerneldict[self.kernel]:
+              kernel = kerneldict[self.kernel]['*']
+              logger.info("resource '%s' not known for kernel '%s' - use wildcard" \
+                      % (resource, self.kernel))
+          else:
+              raise ValueError("no resource '%s' nor wildcard found for kernel %s" \
+                      % (resource, self.kernel))
 
           if 'uses_mpi' in kernel:
               uses_mpi = bool(kernel['uses_mpi']),
