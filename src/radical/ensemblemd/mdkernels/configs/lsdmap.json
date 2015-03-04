@@ -12,7 +12,7 @@
         {
             "environment" : {},
             "pre_exec" : ["module load -intel +intel/14.0.1.106","export PYTHONPATH=/home1/03036/jp43/.local/lib/python2.7/site-packages","module load python","export PATH=/home1/03036/jp43/.local/bin:$PATH"],
-            "executable" : ["lsdmap"],
+            "executable" : ["/opt/apps/intel14/mvapich2_2_0/python/2.7.6/lib/python2.7/site-packages/mpi4py/bin/python-mpi"],
             "post_exec" : ["module load python","export PYTHONPATH=/home1/03036/jp43/.local/lib/python2.7/site-packages:/home1/03036/jp43/.local/lib/python2.7/site-packages/lsdmap/rw:$PYTHONPATH"]
         },
         "archer.ac.uk":
