@@ -126,6 +126,7 @@ class MDTaskDescription(attributes.Attributes) :
 
         # register properties with the attribute interface
         self._attributes_register(KERNEL,                None, attributes.STRING, attributes.SCALAR, attributes.WRITEABLE)
+        self._attributes_register(EXECUTABLE,            None, attributes.STRING, attributes.SCALAR, attributes.WRITEABLE)
         self._attributes_register(ARGUMENTS,             None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
         self._attributes_register(MIN_VERSION,           None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
         self._attributes_register(INPUT_DATA,            None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
@@ -153,6 +154,10 @@ class MDTaskDescription(attributes.Attributes) :
             else:
                 raise ValueError("no resource '%s' nor wildcard found for kernel %s" \
                         % (resource, self.kernel))
+
+            if 'kernel_filter' in kernel:
+                kernel['kernel_filter'] (self, kernel, resource)
+
 
             if 'uses_mpi' in kernel:
                 uses_mpi = bool(kernel['uses_mpi']),

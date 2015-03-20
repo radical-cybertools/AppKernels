@@ -38,7 +38,15 @@ class _KernelDict(object):
                 kernel_cfgs = data["kernel_configs"]
                 logger.debug("Found MD kernel '{0}' configurations for {1}".format(kernel_name, kernel_cfgs.keys()))
 
-                self._kerneldict[data["kernel_name"]] = data["kernel_configs"]
+                if 'kernel_filter' in data:
+                    filter_name = str(data['kernel_filter'])
+                    filter_mod  = __import__ ('radical.ensemblemd.mdkernels.filter', globals(), locals(), [filter_name], -1)
+
+                    for cfg in data["kernel_configs"]:
+                        data["kernel_configs"][cfg]['kernel_filter'] = getattr(filter_mod, filter_name)
+
+                self._kerneldict[kernel_name] = data["kernel_configs"]
+
 
         except Exception, ex:
             logger.error("Error loading JSON file: {0}".format(str(ex)))

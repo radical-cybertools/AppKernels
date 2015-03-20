@@ -126,7 +126,8 @@ setup_args = {
     'packages'    :       ['radical', 
                            'radical.ensemblemd', 
                            'radical.ensemblemd.mdkernels',
-                           'radical.ensemblemd.mdkernels.configs'],
+                           'radical.ensemblemd.mdkernels.configs',
+                           'radical.ensemblemd.mdkernels.filter'],
     'package_dir' :       {'': 'src'},  
     'scripts'          : ['bin/radical-ensemblemd-mdkernels-bind.py'],
 
