@@ -20,7 +20,7 @@
             "environment" : {},
             "pre_exec" : ["module unload python/2.7.6-ucs4","module load python","module load numpy","module load scipy/0.13.3-libsci"," module load lsdmap","export PYTHONPATH=/work/y07/y07/cse/lsdmap/lib/python2.7/site-packages:$PYTHONPATH"],
             "executable" : ["python"],
-            "post_exec" : ["module load python numpy"]
+            "post_exec" : ["module unload python/2.7.6-ucs4","module load python","module load numpy"]
         },
         "biou.rice.edu":
         {
