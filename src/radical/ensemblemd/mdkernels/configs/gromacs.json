@@ -20,7 +20,14 @@
             "pre_exec" : ["module load gromacs python"],
             "executable" : ["python"]
         },
-
+        "davinci.rice.edu":
+        {
+            "environment" : {},
+            "pre_exec" : ["module load python"],
+            "executable" : ["python"]
+        },
+        
+        
         "gordon.sdsc.xsede.org": {
             "pre_exec"      : ["module load gromacs",
                                "export MV2_ENABLE_AFFINITY=0"
