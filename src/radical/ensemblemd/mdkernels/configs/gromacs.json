@@ -20,7 +20,7 @@
             "pre_exec" : ["module load gromacs python"],
             "executable" : ["python"]
         },
-        "davinci.rice.edu":
+        "rice.davinci":
         {
             "environment" : {},
             "pre_exec" : ["module load python"],
