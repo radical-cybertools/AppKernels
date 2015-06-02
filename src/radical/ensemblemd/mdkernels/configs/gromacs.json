@@ -23,7 +23,7 @@
         "rice.davinci":
         {
             "environment" : {},
-            "pre_exec" : ["module load python"],
+            "pre_exec" : ["module load python3/3.2.1","module load openmpi/1.0.4-gcc","module load gromacs/5.0.4"],
             "executable" : ["python"]
         },
         
