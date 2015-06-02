@@ -28,7 +28,7 @@
             "pre_exec" : ["module load python"," module load lsdmap"],
             "executable" : ["python"]
         },
-        "davinci.rice.edu":
+        "rice.davinci":
         {
             "environment" : {},
             "pre_exec" : ["module load python"],
