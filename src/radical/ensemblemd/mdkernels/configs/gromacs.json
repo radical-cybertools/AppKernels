@@ -2,19 +2,19 @@
     "kernel_name": "GROMACS",
     "kernel_configs": {
 
-        "stampede.tacc.utexas.edu": {
+        "xsede.stampede": {
             "pre_exec"      : ["module load gromacs python mpi4py"],
             "executable"    : "mdrun_mpi",
             "uses_mpi"      : "True"
         },
 
-        "trestles.sdsc.xsede.org": {
+        "xsede.trestles": {
             "pre_exec"      : ["module load gromacs","export MV2_ENABLE_AFFINITY=0"],
             "executable"    : "/opt/gromacs/bin/mdrun_mpi",
             "uses_mpi"      : "True"
         },
         
-        "biou.rice.edu":
+        "rice.biou":
         {
             "environment" : {},
             "pre_exec" : ["module load gromacs python"],
@@ -28,7 +28,7 @@
         },
         
         
-        "gordon.sdsc.xsede.org": {
+        "xsede.gordon": {
             "pre_exec"      : ["module load gromacs",
                                "export MV2_ENABLE_AFFINITY=0"
                               ],
@@ -36,7 +36,7 @@
             "uses_mpi"      : "True"
         },
 
-        "blacklight.psc.xsede.org": {
+        "xsede.blacklight": {
             "pre_exec"      : ["module load gromacs"],
             "executable"    : "mdrun_mpi",
             "uses_mpi"      : "True"
@@ -54,7 +54,7 @@
             "pre_exec"    : ["(test -d $HOME/bin || mkdir $HOME/bin)","export PATH=$PATH:$HOME/bin","module load gromacs","ln -s /opt/gromacs/bin/grompp_mpi $HOME/bin/grompp && ln -s /opt/gromacs/bin/mdrun_mpi $HOME/bin/mdrun"],
             "executable"  : ["/bin/bash"]
         },
-        "archer.ac.uk":
+        "epsrc.archer":
         {
             "environment" : {},
             "pre_exec"    : ["module load packages-archer","module unload python/2.7.6-ucs4","module load gromacs/5.0.0","module load python"],
