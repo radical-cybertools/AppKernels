@@ -17,7 +17,7 @@
         "rice.biou":
         {
             "environment" : {},
-            "pre_exec" : ["module load gromacs python"],
+            "pre_exec" : ["export PATH=$PATH:/home/vb17/modules/gromacs-5.0.4/bin","module load python/2.7.6"],
             "executable" : ["python"]
         },
         "rice.davinci":
