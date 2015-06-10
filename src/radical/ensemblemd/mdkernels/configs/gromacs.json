@@ -3,7 +3,7 @@
     "kernel_configs": {
 
         "xsede.stampede": {
-            "pre_exec"      : ["module load gromacs python mpi4py"],
+            "pre_exec"      : ["module load TACC","module load intel/13.0.2.146","module load gromacs","module load python","module load mpi4py"],
             "executable"    : "mdrun_mpi",
             "uses_mpi"      : "True"
         },
