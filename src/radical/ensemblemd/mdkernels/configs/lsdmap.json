@@ -25,7 +25,7 @@
         "rice.biou":
         {
             "environment" : {},
-            "pre_exec" : ["module load python"," module load lsdmap"],
+            "pre_exec" : ["module load python/2.7.6","export PYTHONPATH=/home/vb17/.local/lib/python2.7/site-packages","export PATH=$PATH:/home/vb17/.local/bin"],
             "executable" : ["python"]
         },
         "rice.davinvci":
