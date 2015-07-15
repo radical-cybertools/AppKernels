@@ -12,7 +12,7 @@
     "epsrc.archer":
     {
       "environment" : {},
-      "pre_exec" : ["module unload python/2.7.6-ucs4","module load python","module load numpy/1.8.0","module load scipy/0.13.3-libsci","module load coco","module load netcdf4-python","module load amber"],
+      "pre_exec" : ["module unload python/2.7.6-ucs4","module load python","module load numpy/1.8.0-libsci","module load scipy/0.13.3-libsci","module load coco","module load netcdf4-python","module load amber"],
       "executable" : ["/bin/bash"],
       "post_exec" : []
     },
