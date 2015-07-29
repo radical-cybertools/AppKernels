@@ -5,7 +5,7 @@
     "xsede.stampede":
     {
       "environment" : {},
-      "pre_exec" : ["module load TACC && module load amber"],
+      "pre_exec" : ["module load TACC","module load amber"],
       "executable" : ["pmemd.MPI"]
     },
     "epsrc.archer":
