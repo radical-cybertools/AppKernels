@@ -13,20 +13,7 @@
             "executable"    : "/opt/gromacs/bin/mdrun_mpi",
             "uses_mpi"      : "True"
         },
-        
-        "rice.biou":
-        {
-            "environment" : {},
-            "pre_exec" : ["export PATH=$PATH:/home/vb17/modules/gromacs-5.0.4/bin","module load python/2.7.6"],
-            "executable" : ["python"]
-        },
-        "rice.davinci":
-        {
-            "environment" : {},
-            "pre_exec" : ["module load python3/3.2.1","module load openmpi/1.0.4-gcc","module load gromacs/5.0.4"],
-            "executable" : ["python"]
-        },
-        
+               
         
         "xsede.gordon": {
             "pre_exec"      : ["module load gromacs",
@@ -57,7 +44,7 @@
         "epsrc.archer":
         {
             "environment" : {},
-            "pre_exec"    : ["module load packages-archer","module unload python/2.7.6-ucs4","module load gromacs/5.0.0","module load python"],
+            "pre_exec"    : ["module load packages-archer","module load gromacs/5.0.0","python-compute/2.7.6"],
             "executable"  : ["/bin/bash"]
         }
     }

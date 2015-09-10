@@ -12,23 +12,16 @@
     "epsrc.archer":
     {
       "environment" : {},
-      "pre_exec" : ["module unload python/2.7.6-ucs4","module load python","module load numpy/1.8.0-libsci","module load scipy/0.13.3-libsci","module load coco","module load netcdf4-python","module load amber"],
+      "pre_exec" : [  
+                      "module load python-compute/2.7.6",
+                      "module load pc-numpy/1.8.0-libsci",
+                      "module load pc-scipy/0.13.3-libsci",
+                      "module load pc-coco/0.18",
+                      "module load pc-netcdf4-python/1.1.0",
+                      "module load amber"
+                    ],
       "executable" : ["/bin/bash"],
       "post_exec" : []
     },
-    "rice.biou":
-    {
-      "environment" : {},
-      "pre_exec" : [""],
-      "executable" : [""],
-      "post_exec" : []
-    },
-    "rice.davinci":
-    {
-      "environment" : {},
-      "pre_exec" : [],
-      "executable" : [],
-      "post_exec" : []
-    }
   }
 }

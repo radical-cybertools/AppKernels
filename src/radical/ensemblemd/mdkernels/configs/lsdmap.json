@@ -2,12 +2,6 @@
     "kernel_name": "LSDMAP",
     "kernel_configs":
     {
-        "xsede.trestles":
-        {
-            "environment" : {},
-            "pre_exec" : ["module load python","module load scipy","module load mpi4py","(test -d $HOME/lsdmap || (git clone https://github.com/jp43/lsdmap.git $HOME/lsdmap && python $HOME/lsdmap/setup.py install --user))","export PATH=$PATH:$HOME/lsdmap/bin","chmod +x $HOME/lsdmap/bin/lsdmap"],
-            "executable" : ["/bin/bash"]
-        },
         "xsede.stampede":
         {
             "environment" : {},
@@ -18,21 +12,10 @@
         "epsrc.archer":
         {
             "environment" : {},
-            "pre_exec" : ["module unload python/2.7.6-ucs4","module load python","module load numpy","module load scipy/0.13.3-libsci"," module load lsdmap","export PYTHONPATH=/work/y07/y07/cse/lsdmap/lib/python2.7/site-packages:$PYTHONPATH"],
+            "pre_exec" : ["module load python-compute/2.7.6","module load pc-numpy/1.8.0-libsci","module load pc-scipy/0.13.3-libsci","module load lsdmap","export PYTHONPATH=/work/y07/y07/cse/lsdmap/lib/python2.7/site-packages:$PYTHONPATH"],
             "executable" : ["python"],
-            "post_exec" : ["module unload python/2.7.6-ucs4","module load python","module load numpy"]
+            "post_exec" : ["module load python-compute/2.7.6","module load pc-numpy/1.8.0-libsci"]
         },
-        "rice.biou":
-        {
-            "environment" : {},
-            "pre_exec" : ["module load python/2.7.6","export PYTHONPATH=/home/vb17/.local/lib/python2.7/site-packages","export PATH=$PATH:/home/vb17/.local/bin"],
-            "executable" : ["python"]
-        },
-        "rice.davinvci":
-        {
-            "environment" : {},
-            "pre_exec" : ["module load python"],
-            "executable" : ["python"]
-        }
+
     }
 }
