@@ -22,6 +22,6 @@
                     ],
       "executable" : ["/bin/bash"],
       "post_exec" : []
-    },
+    }
   }
 }
