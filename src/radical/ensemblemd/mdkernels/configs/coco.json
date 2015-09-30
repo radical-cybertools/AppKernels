@@ -5,7 +5,7 @@
     "xsede.stampede":
     {
       "environment" : {},
-      "pre_exec" : ["module load intel/13.0.2.146","module load python/2.7.9","module load mpi4py","module load netcdf/4.3.2","module load hdf5/1.8.13","module load amber","export PYTHONPATH=/work/02998/ardi/coco-0.19_installation/lib/python2.7/site-packages:$PYTHONPATH","export PATH=/work/02998/ardi/coco-0.19_installation/bin:$PATH"],
+      "pre_exec" : ["module load intel/13.0.2.146","module load python/2.7.9","module load mpi4py","module load netcdf/4.3.2","module load hdf5/1.8.13","module load amber","export PYTHONPATH=/work/02998/ardi/coco-0.21_installation/lib/python2.7/site-packages:$PYTHONPATH","export PATH=/work/02998/ardi/coco-0.21_installation/bin:$PATH"],
       "executable" : ["pyCoCo"],
       "post_exec" : []
     },
@@ -16,7 +16,7 @@
                       "module load python-compute/2.7.6",
                       "module load pc-numpy/1.8.0-libsci",
                       "module load pc-scipy/0.13.3-libsci",
-                      "module load pc-coco/0.18",
+                      "module load pc-coco/0.21",
                       "module load pc-netcdf4-python/1.1.0",
                       "module load amber"
                     ],
