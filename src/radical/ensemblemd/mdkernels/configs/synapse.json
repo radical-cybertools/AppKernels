@@ -1,0 +1,11 @@
+{
+    "kernel_name": "SYNAPSE_PROFILE",
+    "kernel_filter" : "wrapper",
+    "kernel_configs": {
+
+        "*": {
+            "executable" : "synapse_profile"
+        }
+    }
+}
+

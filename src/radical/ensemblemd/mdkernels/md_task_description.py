@@ -126,6 +126,7 @@ class MDTaskDescription(attributes.Attributes) :
 
         # register properties with the attribute interface
         self._attributes_register(KERNEL,                None, attributes.STRING, attributes.SCALAR, attributes.WRITEABLE)
+        self._attributes_register(EXECUTABLE,            None, attributes.STRING, attributes.SCALAR, attributes.WRITEABLE)
         self._attributes_register(ARGUMENTS,             None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
         self._attributes_register(MIN_VERSION,           None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
         self._attributes_register(INPUT_DATA,            None, attributes.STRING, attributes.VECTOR, attributes.WRITEABLE)
@@ -141,54 +142,66 @@ class MDTaskDescription(attributes.Attributes) :
         """
 
         try: 
-          if resource.endswith(":local"):
-              resource = resource.replace(":local", "")
+            if resource.endswith(":local"):
+                resource = resource.replace(":local", "")
 
-          kernel = kerneldict[self.kernel][resource]
+            if resource in kerneldict[self.kernel]:
+                kernel = kerneldict[self.kernel][resource]
+            elif '*' in kerneldict[self.kernel]:
+                kernel = kerneldict[self.kernel]['*']
+                logger.info("resource '%s' not known for kernel '%s' - use wildcard" \
+                        % (resource, self.kernel))
+            else:
+                raise ValueError("no resource '%s' nor wildcard found for kernel %s" \
+                        % (resource, self.kernel))
 
-          if 'uses_mpi' in kernel:
-              uses_mpi = bool(kernel['uses_mpi']),
-          else:
-              uses_mpi = False
+            if 'kernel_filter' in kernel:
+                kernel['kernel_filter'] (self, kernel, resource)
 
-          if 'environment' in kernel:
-              environment = kernel['environment']
-          else:
-              environment = None
 
-          pre_exec = []
-          post_exec = []
+            if 'uses_mpi' in kernel:
+                uses_mpi = bool(kernel['uses_mpi']),
+            else:
+                uses_mpi = False
 
-          # Process pre-execution stuff          
-          if 'pre_exec' in kernel and kernel['pre_exec'] is not None:
-            pre_exec.extend(kernel['pre_exec'])
+            if 'environment' in kernel:
+                environment = kernel['environment']
+            else:
+                environment = None
 
-          if 'post_exec' in kernel and kernel['post_exec'] is not None:
-            post_exec.extend(kernel['post_exec'])
+            pre_exec = []
+            post_exec = []
 
-          # Process local input file copy as part of pre-execution
-          if self.copy_local_input_data is not None:
-              for lid in self.copy_local_input_data:
-                  pre_exec.append("cp {0} .".format(lid))
+            # Process pre-execution stuff          
+            if 'pre_exec' in kernel and kernel['pre_exec'] is not None:
+              pre_exec.extend(kernel['pre_exec'])
 
-          if self.purge is True:
-              post_exec.append("rm -rf *")
+            if 'post_exec' in kernel and kernel['post_exec'] is not None:
+              post_exec.extend(kernel['post_exec'])
 
-          bmds = BoundMDTask(
-              _environment = environment,
-              _pre_exec    = pre_exec,
-              _post_exec   = post_exec,
-              _executable  = kernel['executable'], 
-              _mpi         = uses_mpi,
-              _arguments   = self.arguments, 
-              _resource    = resource, 
-              _input_data  = self.input_data, 
-              _output_data = self.output_data
-          )
+            # Process local input file copy as part of pre-execution
+            if self.copy_local_input_data is not None:
+                for lid in self.copy_local_input_data:
+                    pre_exec.append("cp {0} .".format(lid))
 
-          return bmds
+            if self.purge is True:
+                post_exec.append("rm -rf *")
+
+            bmds = BoundMDTask(
+                _environment = environment,
+                _pre_exec    = pre_exec,
+                _post_exec   = post_exec,
+                _executable  = kernel['executable'], 
+                _mpi         = uses_mpi,
+                _arguments   = self.arguments, 
+                _resource    = resource, 
+                _input_data  = self.input_data, 
+                _output_data = self.output_data
+            )
+
+            return bmds
 
         except Exception, ex:
-          logger.error("Couldn't bind MDTaskDescription to resource '{0}': {1}".format(resource, str(ex)))
-          raise ex
+            logger.error("Couldn't bind MDTaskDescription to resource '{0}': {1}".format(resource, str(ex)))
+            raise ex
 
